@@ -1,0 +1,67 @@
+doctype html
+html
+	head
+		style
+			| *{background-color:LightYellow;}
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+
+		link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css')
+
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+		
+		title= 'Leave a Message'
+	body
+		div
+				div(style='float:left;margin:10px;')
+					a(href='/') Home
+
+				div(style='float:right')
+					if (username && authenticated)
+						a(href='/signout', style='margin:10px;') Sign Out
+						a(href='/add_article', style='margin:10px;') Add Article
+						a(href='/profile', style='margin:10px;') Profile
+						span #{username}
+					else
+						a(href='/register', style='margin:10px;') Register
+						a(href='/signin', style='margin:10px;') Log In
+			
+			div(style='padding:50px;')
+				h1= title
+
+			for article in blogs
+				div
+					div(style='float:left;margin-top:10px;')= article.Username
+					div(style='float:right;margin-top:10px;')= article.CreateDate
+					br
+					div(style='clear:both')= article.Article
+					hr(style='margin-top:30px;')
+					br
+					br
+
+			div(style='width:40%;margin-left:30%;')
+				for comment in comments
+					div(style='right:42%; margin-top:20px;')
+						div(style='float:left;margin-top:10px;')= comment.Visitor
+						div(style='float:right;margin-top:10px;')= comment.CreateDate
+						br
+						div(style='clear:both')= comment.Comment
+						hr(style='margin-top:30px;')
+						br
+						br
+					
+			div(style='margin-left:1%;margin-right:1%')
+				form(name="comment", action="/apis/comment/" + messageID, method="post")
+					h1 Leave a message
+					div
+						p
+							span Name: 
+							input(class="form-control", id="exampleInputEmail1", type="text", name="Visitor")
+						p
+							span Message:
+							textarea(class="form-control", cols="50", rows="10", style='resize : none;', name="Comment")
+						div
+							span(style='padding-right:0px')
+							input(class="btn btn-default btn-lg", type="submit", name="submit", value="Reply ")
+							hr(style='width:50%;margin-top:30px;margin-left:0%;')
+							br
+							br

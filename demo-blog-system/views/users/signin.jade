@@ -1,0 +1,35 @@
+doctype html
+html
+	head
+		style
+			| *{background-color:LightYellow;}
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+
+		link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css')
+
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+		
+		title= Login
+	body
+		div(class="comtainer")
+			div(style='float:left;margin:10px;')
+				a(href='/') Home
+		
+			div(style='float:right')
+					a(href='/register', style='margin:10px;') Register
+					a(href='/forget', style='margin:10px;') Forgot password	
+				
+			div(style='padding:50px;')
+				form(role='form', name="login", action="/apis/login", method="post")
+					h1 Login
+					div(class='form-gloup')
+						p
+							label(style='padding-right:50px') Username or e-mail
+							input(type="text", name="user", class="form-control", id="exampleInputEmail1",  placeholder='username@example.com')
+						p
+							label(style='padding-right:110px', for="exampleInputPassword1")  password
+							input(type="password", name="passwd", class="form-control" id="exampleInputPassword1")
+					p
+						span 
+							a(href='/forget', style='padding-right:175px') Forgot password
+						input(class="btn btn-default btn-lg", type="submit", name="submit", value="login")
